@@ -59,10 +59,10 @@ See the requirements.txt file.
 * <code>average\_checkpoints.py</code>: Merges multiple fairseq model checkpoints into a single one via parameter averaging.
 * <code>fairseq\_output\_cleaner.py</code>: Cleans up the translations obtained from fairseq models (called by the relevant bash scripts).
 * <code>finetune\_lm.py</code>: Training script for finetuning MLMs (e.g. XLM-R) on *LM-Wino-X* and the *WinoGrande* datasets.
-* <code>lm\_utils.py</code>: Helper scripts for fine-tuning LMs on the translation and co-reference resolution tasks.
+* <code>lm\_utils.py</code>: Helper scripts for fine-tuning LMs on the translation and coreference resolution tasks.
 * <code>train\_transformer.sh</code>: Trains / finetunes a transformer NMT model (optionally with the *pronoun penalty* objective).
 * <code>translate\_transformer\_base.sh</code>: Obtains translations from the specified NMT model.
-* <code>translate\_transformer\_fair.sh</code>: Obtains translations from the FAIR NMT model based on publically available checkpoints.
+* <code>translate\_transformer\_fair.sh</code>: Obtains translations from a publicly available checkpoint of publicly available, pretrained FAIR NMT models.
 
 ### Model evaluation
 (:blue_book: See **Section 3 & 4** of the paper.)
