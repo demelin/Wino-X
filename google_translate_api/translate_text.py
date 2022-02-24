@@ -10,7 +10,7 @@ def translate_text(src_path, out_path, tgt_lang):
 
     # Initialize the translation client
     translate_client = translate.Client.from_service_account_json(
-        './trial-translate-8cad7c67320d.json')
+        './account.json')
 
     # Read in source text
     lines = list()

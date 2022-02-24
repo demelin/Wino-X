@@ -6,21 +6,19 @@
 
 Full paper is available here: <https://aclanthology.org/2021.emnlp-main.670.pdf>
 
-**Abstract**: Winograd schemas are a well-established tool for evaluating coreference resolution (CoR) and commonsense reasoning (CSR) capabilities of computational models. So far, schemas remained largely confined to English, limiting their utility in multilingual settings. This work presents *Wino-X*, a parallel dataset of German, French, and Russian schemas, aligned with their English counterparts. We use this resource to investigate whether neural machine translation (NMT) models can perform CoR that requires commonsense knowledge and whether multilingual language models (MLLMs) are capable of CSR across multiple languages. Our findings show Wino-X to be exceptionally challenging for NMT systems that are prone to undesireable biases and unable to detect disambiguating information. We quantify biases using established statistical methods and define ways to address both of these issues. We furthermore present evidence of active cross-lingual knowledge transfer in MLLMs, whereby fine-tuning models on English schemas yields CSR improvements in other languages.
+**Abstract**: Winograd schemas are a well-established tool for evaluating coreference resolution (CoR) and commonsense reasoning (CSR) capabilities of computational models. So far, schemas remained largely confined to English, limiting their utility in multilingual settings. This work presents *Wino-X*, a parallel dataset of German, French, and Russian schemas, aligned with their English counterparts. We use this resource to investigate whether neural machine translation (NMT) models can perform CoR that requires commonsense knowledge and whether multilingual language models (MLLMs) are capable of CSR across multiple languages. Our findings show Wino-X to be exceptionally challenging for NMT systems that are prone to undesirable biases and unable to detect disambiguating information. We quantify biases using established statistical methods and define ways to address both of these issues. We furthermore present evidence of active cross-lingual knowledge transfer in MLLMs, whereby fine-tuning models on English schemas yields CSR improvements in other languages.
 
 ---
 
 ## Quick guide: Evaluating models on Wino-X
 ### Neural Machine Translation:
-TODO
-
-
+1. Train a fairseq NMT model using <code>model\_training/train\_transformer.sh</code> or use a publicly available model checkpoint.
+2. Score the contrastive translations in the *MT-Wino-X* benchmark by running <code>model\_evaluation/compute\_nmt\_perplexity.py</code> with the appropriate arguments.
+3. Compute model accuracy and supplementary metrics by running <code>model\_evaluation/evaluate\_accuracy\_nmt.py</code> with the appropriate arguments.
 
 ### Multi-lingual Language Models 
-TODO
-
-
-
+1. Optionally fine-tune an MLM on a subset of *LM-Wino-X* using the <code>model\_training/finetune\_lm.sh</code> script.
+2. Score the contrastive translations in the *LM-Wino-X* benchmark and compute model accuracy by running <code>model\_evaluation/compute\_mlm\_perplexity.py</code> with the appropriate arguments.
 
 ## Dataset
 **The *Wino-X* dataset is available at <https://tinyurl.com/winox-data>.**. It contains two directories: <code>mt\_wino\_x</code> and <code>lm\_wino\_x</code>, designed for the evaluation of NMT models and MLLMs, respectively. For a detailed breakdown of dataset statistics, refer to :blue\_book: **Section 2** and :blue\_book: **Appendix A.3** of the paper. 
@@ -28,8 +26,7 @@ TODO
 ## Codebase
 
 ### Requirements
-
-
+See the requirements.txt file.
 
 ### Data pre-processing
 (:blue_book: See **Section 2** of the paper.)
@@ -53,17 +50,19 @@ TODO
 * <code>select\_source\_sentences.py</code>: Writes relevant *WinoGrande* samples to a file used to obtain silver target translations from Google Translate.
 * <code>spacy\_tag\_map.py</code>: Contains SpaCy dependency parsing tags.
 * <code>split\_challenge\_sets.py</code>: Splits the challenge set into training, development, and testing segments.
-* <code>test\_animacy.py</code>: Estimates whether the input item (either a word or a phrase) is animate or not based on language model perplexity off filled-out, pre-defined sentence templates.
+* <code>test\_animacy.py</code>: Estimates whether the input item (either a word or a phrase) is animate or not based on language model perplexity of filled-out, pre-defined sentence templates.
 * <code>util.py</code>: Various dataset construction helper scripts.
 * <code>learn\_alignments.sh</code>: Bash script for learning alignments with *awesome-align*.
 
 ### Model training
-
-TODO: WHERE IS THE MT TRAINING SCRIPT?
-
 (:blue_book: See **Section 3 & 4** of the paper.)
+* <code>average\_checkpoints.py</code>: Merges multiple fairseq model checkpoints into a single one via parameter averaging.
+* <code>fairseq\_output\_cleaner.py</code>: Cleans up the translations obtained from fairseq models (called by the relevant bash scripts).
 * <code>finetune\_lm.py</code>: Training script for finetuning MLMs (e.g. XLM-R) on *LM-Wino-X* and the *WinoGrande* datasets.
 * <code>lm\_utils.py</code>: Helper scripts for fine-tuning LMs on the translation and co-reference resolution tasks.
+* <code>train\_transformer.sh</code>: Trains / finetunes a transformer NMT model (optionally with the *pronoun penalty* objective).
+* <code>translate\_transformer\_base.sh</code>: Obtains translations from the specified NMT model.
+* <code>translate\_transformer\_fair.sh</code>: Obtains translations from the FAIR NMT model based on publically available checkpoints.
 
 ### Model evaluation
 (:blue_book: See **Section 3 & 4** of the paper.)
