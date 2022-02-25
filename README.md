@@ -20,6 +20,8 @@ Full paper is available here: <https://aclanthology.org/2021.emnlp-main.670.pdf>
 1. Optionally fine-tune an MLM on a subset of *LM-Wino-X* using the <code>model\_training/finetune\_lm.sh</code> script.
 2. Score the contrastive translations in the *LM-Wino-X* benchmark and compute model accuracy by running <code>model\_evaluation/compute\_mlm\_perplexity.py</code> with the appropriate arguments.
 
+---
+
 ## Dataset
 **The *Wino-X* dataset is available at <https://tinyurl.com/winox-data>.**. It contains two directories: <code>mt\_wino\_x</code> and <code>lm\_wino\_x</code>, designed for the evaluation of NMT models and MLLMs, respectively. For a detailed breakdown of dataset statistics, refer to :blue\_book: **Section 2** and :blue\_book: **Appendix A.3** of the paper. 
 
