@@ -1,4 +1,4 @@
-## Supplementary materials for the paper "*Wino-X*: Multilingual Winograd Schemas for Commonsense Reasoning and Coreference Resolution" (Emelin et al., 2020)
+## Supplementary materials for the paper "*Wino-X*: Multilingual Winograd Schemas for Commonsense Reasoning and Coreference Resolution" (Emelin et al., 2021)
 
 <p align="center">
   <img src="images/example.png" />
